@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8080
 const {resolve} = require('path');
 const express = require('express')
 
-let app = module.export = express()
+let app = module.exports = express()
 
 // app stuff
 
