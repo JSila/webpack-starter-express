@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
-const webpackConfig = require('../webpack.config')
+const webpackConfig = require('../../webpack.config')
 
 webpackConfig.entry.unshift('webpack-hot-middleware/client?reload=true')
 

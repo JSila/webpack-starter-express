@@ -10,7 +10,7 @@ let app = module.exports = express()
 if (!isProd) {
   app.use(express.static('public'))
 
-  let {devMiddleware} = require('./webpack/applyMiddlewares')(app)
+  let {devMiddleware} = require('./scripts/webpack/applyMiddlewares')(app)
 
   app.get('/*', (req, res) => {
     res.write(devMiddleware.fileSystem.readFileSync(resolve('public', 'index.html')))

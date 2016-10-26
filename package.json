@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "NODE_ENV=development nodemon --ignore src/"
+    "start": "NODE_ENV=development nodemon --ignore src/",
+    "test": "node scripts/test --env=jsdom"
   },
   "dependencies": {
     "babel-core": "^6.18.0",
@@ -22,15 +23,37 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.0",
+    "jest": "^16.0.2",
     "json-loader": "^0.5.4",
     "node-sass": "^3.10.1",
     "nodemon": "^1.11.0",
+    "object-assign": "^4.1.0",
+    "promise": "^7.1.1",
     "react-dev-utils": "^0.3.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.0",
-    "webpack-manifest-plugin": "^1.1.0"
+    "webpack-manifest-plugin": "^1.1.0",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/FileStub.js",
+      "^.+\\.css$": "<rootDir>/config/jest/CSSStub.js"
+    },
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ],
+    "testEnvironment": "node"
   }
 }

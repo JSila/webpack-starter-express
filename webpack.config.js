@@ -2,13 +2,14 @@ const {resolve} = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const plugins = require('./webpack/plugins')
+const plugins = require('./scripts/webpack/plugins')
 
 const {isProd} = require('./config/app')
 
 module.exports = {
   devtools: isProd ? 'source-map' : 'eval',
   entry: [
+    resolve('config', 'polyfills.js'),
     resolve('src', 'js', 'main.js'),
     resolve('src', 'scss', 'main.scss')
   ],
@@ -41,5 +42,10 @@ module.exports = {
   },
   resolve: {
     extentions: ['', '.js', '.json']
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   }
 }
