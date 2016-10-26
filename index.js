@@ -1,10 +1,7 @@
-const isProd = process.env.NODE_ENV == 'production'
-const isTest = process.env.NODE_ENV == 'test'
-const isDev = !isTest && !isProd
-const PORT = process.env.PORT || 8080
-
 const {resolve} = require('path');
 const express = require('express')
+
+const {isTest, isProd, PORT} = require('./config/app')
 
 let app = module.exports = express()
 
@@ -23,6 +20,6 @@ if (!isProd) {
 
 if (!isTest) {
   let server = app.listen(PORT, () => {
-    console.log('Running on http://localhost:%s', server.address().port)
+    console.log(`Running on http://localhost:${server.address().port}`)
   })
 }

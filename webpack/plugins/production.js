@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = [
   new webpack.optimize.DedupePlugin(),
@@ -11,8 +12,18 @@ module.exports = [
     compress: {
       screw_ie8: true,
       warnings: false
+    },
+    mangle: {
+      screw_ie8: true
+    },
+    output: {
+      comments: false,
+      screw_ie8: true
     }
   }),
   new webpack.optimize.OccurenceOrderPlugin(),
-  new ExtractTextPlugin('main.[hash].css')
+  new ExtractTextPlugin('main.[hash].css'),
+  new ManifestPlugin({
+    fileName: 'asset-manifest.json'
+  })
 ]

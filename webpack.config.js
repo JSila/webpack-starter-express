@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const plugins = require('./webpack/plugins')
 
-const isProd = process.env.NODE_ENV == 'production'
+const {isProd} = require('./config/app')
 
 module.exports = {
   devtools: isProd ? 'source-map' : 'eval',
@@ -19,6 +19,13 @@ module.exports = {
   },
   plugins: plugins(isProd),
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'eslint',
+        include: resolve('src', 'js', 'main.js'),
+      }
+    ],
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
@@ -26,7 +33,7 @@ module.exports = {
     }, {
       test: /\.scss$/,
       exclude: /node_modules/,
-      loader: isProd ? ExtractTextPlugin.extract(['css', 'sass']) : 'style!css!sass'
+      loader: isProd ? ExtractTextPlugin.extract(['css', 'sass']) : ['style', 'css', 'sass'].join('!')
     }, {
       test: /\.json$/,
       loaders: ['json-loader']
